@@ -68,3 +68,34 @@ head -1 flags.csv | sed -e s/:/\\n/g | grep -n Continent | cut -c1-2
 
 if the column name does not exist, then it will not return anything.
 
+**You can sort a file like**
+
+```bash
+# -r is for reverse/descending order
+sort -r flags.csv
+```
+
+**You can view unique values of a column like**
+
+For example, you want to view all distinct values of the `Continents` column
+
+```bash
+# 10th column points to the Continent column
+awk -F: '{print $10}' flags.csv | sort -u
+```
+
+**To count the unique rows**
+
+```bash
+# counts the distinct count of `Name` column
+awk -F: '{print $11}' flags.csv | sort -u | wc -l
+```
+
+**value counts**
+
+get the value counts for a the `Continent` column, do the following
+
+```bash
+# Continent is the 11th column
+awk -F: '{print $11}' flags.csv | sort | uniq -c
+```
