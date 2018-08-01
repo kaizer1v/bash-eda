@@ -57,3 +57,14 @@ wc flags.csv
 # displays head of column 10 and 11
 awk -F: '{print $10 $11 }' flags.csv | head -5
 ```
+
+**Get index of a column by it's name**
+Let's say you want to know the index of the column `Continent`, you would do
+
+```bash
+# assuming that your delimeter is the `:` char
+head -1 flags.csv | sed -e s/:/\\n/g | grep -n Continent | cut -c1-2 
+```
+
+if the column name does not exist, then it will not return anything.
+
