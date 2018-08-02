@@ -99,3 +99,54 @@ get the value counts for a the `Continent` column, do the following
 # Continent is the 11th column
 awk -F: '{print $11}' flags.csv | sort | uniq -c
 ```
+
+## Merging
+
+For this purposes, consider two files containing the following texts
+
+*file1.txt*
+
+```
+Nawazuddin grapes 27
+Sardar wasseypur 4
+Piyush dhanbad 8
+Brad fury 2
+DiNero casino 5
+Duvall godfather 12
+Medson purple 30
+Flintstone dude 7
+```
+
+and *file2.txt* containing
+
+```
+Nawazuddin <pink>
+Sardar <blue>
+Piyush <orange>
+Brad <blue>
+DiNero <red>
+Duvall <purple>
+Medson <blue>
+Flintstone <orange>
+```
+
+You can merge two files like 
+
+```bash
+# delimeter as a space
+join file1.txt file2.txt
+```
+
+will give you the output **merged** !! 
+
+```
+Nawazuddin <pink> grapes 27
+Sardar <blue> wasseypur 4
+Piyush <orange> dhanbad 8
+Brad <blue> fury 2
+DiNero <red> casino 5
+Duvall <purple> godfather 12
+Medson <blue> purple 30
+Flintstone <orange> dude 7
+```
+
