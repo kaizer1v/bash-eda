@@ -150,3 +150,23 @@ Medson <blue> purple 30
 Flintstone <orange> dude 7
 ```
 
+**Preview a large file**
+
+```bash
+less large_file.csv
+```
+
+will help you load only the section of the file and then load the remaining as you navigate - saves memory usage for really large files - without reading the full file.
+
+Now, if you want to view only the rows containing a particular pattern and view it partly
+
+```bash
+strings large_file.csv | grep some_string | less 
+```
+
+Similary,
+**view the count occurances of `some_string`**
+
+```bash
+strings large_file.csv | grep some_string | wc -l
+```
