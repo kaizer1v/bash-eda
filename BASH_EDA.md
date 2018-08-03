@@ -103,6 +103,15 @@ and if you want to see the number of countries within Europe, you can
 cut -d: -f1,10,11 flags.csv | grep Europe | wc -l
 ```
 
+**NOT** 
+
+Similarly, if you want to view all the Continent's other than Europe, then simply add the `-v` option in the grep
+
+```bash
+cut -d: -f1,10,11 flags.csv | grep -v Europe
+```
+
+
 **You can view unique values of a column like**
 
 For example, you want to view all distinct values of the `Continents` column
