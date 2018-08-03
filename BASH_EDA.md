@@ -75,6 +75,34 @@ if the column name does not exist, then it will not return anything.
 sort -r flags.csv
 ```
 
+**View specific columns**
+
+Say you only want to view the `ID`, `Name` and the `Continent` column, first you need to know the ids of the columns - 
+
+```bash
+head -1 flags.csv | sed s/:/\\n/g
+```
+
+will display the columns vertically and then you can get the index of the columns (manually for now) to retrieve the column numbers. Note that the column index/numbers start from 1 and not from 0. Now, after you have retrieved the column numbers, you can choose the specific columns to view like
+
+```bash
+cut -d: -f1,10,11 flags.csv | head
+```
+
+**Filtering**
+
+view only **Europe** continent's countries and IDs
+
+```bash
+cut -d: -f1,10,11 flags.csv | grep Europe
+```
+
+and if you want to see the number of countries within Europe, you can
+
+```bash
+cut -d: -f1,10,11 flags.csv | grep Europe | wc -l
+```
+
 **You can view unique values of a column like**
 
 For example, you want to view all distinct values of the `Continents` column
