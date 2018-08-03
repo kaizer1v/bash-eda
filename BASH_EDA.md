@@ -100,6 +100,15 @@ get the value counts for a the `Continent` column, do the following
 awk -F: '{print $11}' flags.csv | sort | uniq -c
 ```
 
+an even improved way of doing it is by using `cut` like
+
+```bash
+cut -f11 -d: flags.csv | sort | uniq -c | sort -k1,1nr
+```
+
+will sort the value counts in descending order for the `Continent` column i.e. column 11
+
+
 ## Merging
 
 For this purposes, consider two files containing the following texts
