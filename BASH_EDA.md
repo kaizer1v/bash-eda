@@ -108,9 +108,10 @@ cut -d: -f1,10,11 flags.csv | grep Europe | wc -l
 Similarly, if you want to view all the Continent's other than Europe, then simply add the `-v` option in the grep
 
 ```bash
-cut -d: -f1,10,11 flags.csv | grep -v Europe
+cut -d: -f1,10,11 flags.csv | grep -cv Europe
 ```
 
+the `-c` in the `grep` command will only return the `count` by defult instead of adding `wc -l` at the end of the line.
 
 **You can view unique values of a column like**
 
@@ -215,4 +216,33 @@ Similary,
 
 ```bash
 strings large_file.csv | grep some_string | wc -l
+```
+
+
+## Numeric Values
+
+For this section prepare with a sample file which you download by running the following command
+
+```bash
+wget https://www.data36.com/demo1.csv --no-check-certificate
+```
+
+will save a file called `demo1.csv`
+
+**Sort numeric values**
+
+by running the `sort demo1.csv` will sort the values assuming that it contains text values, but you will need to add the `-n` parameter to make it sort like numbers
+
+```bash
+# the `u` will only return unique values
+sort -nu demo1.csv
+```
+
+So if you had to get the max, min values you would
+
+```bash
+# min
+sort -nu demo1.csv | head -1
+# max
+sort -nu demo1.csv | tail -1
 ```
