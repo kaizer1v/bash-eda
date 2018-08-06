@@ -75,6 +75,22 @@ if the column name does not exist, then it will not return anything.
 sort -r flags.csv
 ```
 
+You can even sort based on a specific column. So, let's extract only specific columns first by
+
+```bash
+# will columns 1st, 10th and 11th column
+# ID, Name, Continent
+cut -d: -f1,10,11 flags.csv
+```
+
+now, let's take that and sort it by the 2nd column i.e. the Name - which is the country name by descending order
+
+```bash
+#                               -k is for column #, -r is for reverse
+cut -d: -f1,10,11 flags.csv | sort -k2 -r
+```
+
+
 **View specific columns**
 
 Say you only want to view the `ID`, `Name` and the `Continent` column, first you need to know the ids of the columns - 
