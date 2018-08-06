@@ -11,6 +11,8 @@
 
 If you want to do some really advanced stuff on the bash, you can also check out the [csvkit python library](https://pypi.org/project/csvkit/)
 
+There's also a great book on [Data Science at the command line](https://www.datascienceatthecommandline.com/index.html)
+
 # cat
 
 `cat <filename>` will display contents of any given file. You can concatinate multiple files to read at onces like
