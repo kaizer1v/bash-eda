@@ -7,7 +7,9 @@
 - show all columns (.columns)
 - display specific rows by index   (df.iloc[:, 1, 2, 3])
 - display specific column by index (df.iloc[1, 2, 3, :])
-- display specific column by name 
+- display specific column by name
+
+If you want to do some really advanced stuff on the bash, you can also check out the [csvkit python library](https://pypi.org/project/csvkit/)
 
 # cat
 
