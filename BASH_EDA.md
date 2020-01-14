@@ -18,11 +18,9 @@ For the purpose of this notebook, we are going to be using the `flags.csv` data 
 
 Also for every command that you see in this notebook, you can always check the `--help` or the `man` command to know more details about it. Eg: running the `head --help` will provide the necessary details for the `head` command.
 
-## Reading Files
-
 Firstly, you want to open the file and see what's in it. Here's a way to view the first `n` lines to get an idea about what the data contains.
 
-### Columns
+## Columns
 
 ```bash
 head -1 flags.csv
@@ -46,7 +44,7 @@ If you want to know the number of columns that are present, append the `wc -l` c
 head -1 flags.csv | sed -e s/:/\\n/g | wc -l
 ```
 
-### Rows
+## Rows
 
 We still need to understand what the data contains
 
@@ -62,7 +60,7 @@ tail -n10 flags.csv
 
 As the name `head` and `tail` suggests, you can view the top and bottom rows.
 
-### Overview
+## Overview
 
 Now that we have viewed the file the way we want, we would want to get some basic information about the file - like the total number of rows, the data types of each column etc. 
 
@@ -117,7 +115,7 @@ cut -d: -f1,10,11 flags.csv
 This will only show the 1st, 10th and 11th column.
 
 
-### Sorting
+## Sorting
 
 The next basic activity one would perform on a data file is sorting. You can sort a file using the `sort` command.
 
@@ -144,7 +142,7 @@ cut -d: -f1,10,11 flags.csv | sort -k2 -r
 Note, once we apply the first `cut` command, we only have 3 columns to view i.e. the `ID`, the `Name` and the `Continent`. Here, the index also gets updated i.e. 1, 2, and 3 respectively. The part following the `|` in the above command, refers to `Name` as `-k2`.
 
 
-### Filtering
+## Filtering
 
 Let's filter by the Continent column and view only **Europe** continent
 
@@ -188,7 +186,7 @@ cut -d: -f1,10,11 flags.csv | grep -cv Europe
 the `-c` in the `grep` command will only return the `count` by defult instead of adding `wc -l` at the end of the line.
 
 
-### Unique Values
+## Unique Values
 
 For example, you want to view all unique values of the `Continents` column
 
@@ -229,7 +227,7 @@ cut -f11 -d: flags.csv | sort | uniq -c | sort -k1,1nr
 will sort the value counts in descending order for the `Continent` column i.e. column 11
 
 
-### Merging
+## Merging
 
 For this purposes, consider two files containing the following texts
 
@@ -279,7 +277,7 @@ Medson <blue> purple 30
 Flintstone <orange> dude 7
 ```
 
-### Large File Operations
+## Large File Operations
 
 **Preview a large file**
 
@@ -303,7 +301,7 @@ Similary,
 strings large_file.csv | grep some_string | wc -l
 ```
 
-### Numeric Value Operations
+## Numeric Value Operations
 
 For this section prepare with a sample file which you download by running the following command
 
