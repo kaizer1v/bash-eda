@@ -1,19 +1,21 @@
-# Data Analysis using the shell
+# README
 
-- Read a csv file
-- head(10)
-- tail(10)
-- show number of rows (.shape)
-- show all columns (.columns)
-- display specific rows by index   (df.iloc[:, 1, 2, 3])
-- display specific column by index (df.iloc[1, 2, 3, :])
-- display specific column by name
+## Data Analysis using the shell
+
+* Read a csv file
+* head\(10\)
+* tail\(10\)
+* show number of rows \(.shape\)
+* show all columns \(.columns\)
+* display specific rows by index   \(df.iloc\[:, 1, 2, 3\]\)
+* display specific column by index \(df.iloc\[1, 2, 3, :\]\)
+* display specific column by name
 
 If you want to do some really advanced stuff on the bash, you can also check out the [csvkit python library](https://pypi.org/project/csvkit/)
 
 There's also a great book on [Data Science at the command line](https://www.datascienceatthecommandline.com/index.html)
 
-# cat
+## cat
 
 `cat <filename>` will display contents of any given file. You can concatinate multiple files to read at onces like
 
@@ -33,13 +35,13 @@ Here the `>` will bascially overwrite the contents in `newfile.txt`. If you want
 cat file1.txt >> newfile.txt
 ```
 
-Similarly, you can even read the file in reverse, by using `tac` (_reverse of `cat`_)
+Similarly, you can even read the file in reverse, by using `tac` \(_reverse of `cat`_\)
 
 ```bash
 tac file1.txt
 ```
 
-## using `cat` to create a file
+### using `cat` to create a file
 
 You can use `cat` command to create a file, just like `touch` or a `vim` editor
 
@@ -60,7 +62,7 @@ This is a new line appended at the end of the file.
 
 and then press the `ctrl + d` keys to save and exit.
 
-# echo
+## echo
 
 `echo` simply displays the text and can be used like
 
@@ -71,7 +73,7 @@ hello
 
 Unlike, `cat`, `echo` will not read and output the contents of the file. This is more like just a **print** statement.
 
-## write and append to files
+### write and append to files
 
 You can even use `echo` to append lines into a file using the `>` and the `>>`
 
@@ -83,12 +85,12 @@ echo last line >> file1.txt
 echo overwritten content > file1.txt
 ```
 
-You can use the `-e` option to enable input of special characters like the 
+You can use the `-e` option to enable input of special characters like the
 
-- newline `\n`
-- tab `\t`
+* newline `\n`
+* tab `\t`
 
-## global variables
+### global variables
 
 You can echo the values of the global variables onto shell
 
@@ -98,9 +100,9 @@ echo $USER
 
 > _To view list of all global variables on bash, use the `printenv` command on shell_
 
-# sed
+## sed
 
-Also known as **Stream Editor**, primarily used for modifying contents of a file, like fileting content within a file and substituting values. The two options mentioned below allow you run commands directly from an external file (`-f`) or from the shell command line (`-e`).
+Also known as **Stream Editor**, primarily used for modifying contents of a file, like fileting content within a file and substituting values. The two options mentioned below allow you run commands directly from an external file \(`-f`\) or from the shell command line \(`-e`\).
 
 ```bash
 # run srcipt inline on a textfile
@@ -113,7 +115,7 @@ sed -f scriptfile <filename>
 sed -i command <filename>
 ```
 
-The commands that you want to run on a file are usually regular expressions (covered later in this file) on files to match pattern files.
+The commands that you want to run on a file are usually regular expressions \(covered later in this file\) on files to match pattern files.
 
 The syntax of `sed` command is like
 
@@ -137,7 +139,7 @@ You can even replace the text and write into a new file
 sed -e s/pattern/replace_string/g file1 > file2
 ```
 
-## multiple patterns
+### multiple patterns
 
 Replace multiple patterns at the same time like
 
@@ -147,17 +149,15 @@ sed -e 's/01/JAN/' -e 's/02/FEB/' file1 > file2
 
 will replace **01** to **JAN** as well as **02** to **FEB** from file1 and write into a file2.
 
-# awk
+## awk
 
-
-
-# grep
+## grep
 
 You mainly use `grep` to search for contents within a file.
 
 Say you have a `sample.txt` that looks something like this:
 
-```
+```text
 Fred apples 20
 Susy oranges 5
 Mark watermellons 12
@@ -174,25 +174,25 @@ Betty limes 14
 
 Now, let's use grep to search for some specific lines in this file.
 
-### Search for all the lines that contain `apple`
+#### Search for all the lines that contain `apple`
 
 ```bash
 grep apple sample.txt
 ```
 
-### Search for all the lines that contain `apple` and also display the line numbers
+#### Search for all the lines that contain `apple` and also display the line numbers
 
 ```bash
 grep -n apple sample.txt
 ```
 
-### Search for all the lines that contain `apple` and have an even number
+#### Search for all the lines that contain `apple` and have an even number
 
 ```bash
 grep apple sample.txt | grep [24680]$
 ```
 
-### Search for all the lines that contain `oranges` but not `susy`
+#### Search for all the lines that contain `oranges` but not `susy`
 
 ```bash
 grep oranges sample.txt | grep -v Susy
@@ -204,45 +204,39 @@ If you wanted `susy` to be case-sensitive, add the -i option
 grep oranges sample.txt | grep -vi susy
 ```
 
-### Search for all the lines that start from letters between C and M and have `apples`
+#### Search for all the lines that start from letters between C and M and have `apples`
 
 ```bash
 grep -n ^[C-Mc-m] sample.txt | grep apples
 ```
 
-### How many lines contain the word `apple`
+#### How many lines contain the word `apple`
 
 ```bash
 grep -c apples sample.txt
 ```
 
-* EXTRA *
+* EXTRA \*
 
-### How many lines in a file
+#### How many lines in a file
 
 ```bash
 wc -l sample.txt
 ```
 
-_ `wc` as in word count _
+ _`wc` as in word count_ 
 
-
-
-By now you would have understood that at the heart of `grep` lies * regular expressions *. In fact the name `grep`
-comes from the early days of unix, where if one had to search for a the word `junk` in a file, they wrote it like*
+By now you would have understood that at the heart of `grep` lies  _regular expressions_ . In fact the name `grep` comes from the early days of unix, where if one had to search for a the word `junk` in a file, they wrote it like\*
 
 `g/junk/p`
 
-This feature of searching within a file was so widely used that they separated this search feature and called it 
-`regular expression` and thus, if you had to find any `expression` within a file, you would use the command
+This feature of searching within a file was so widely used that they separated this search feature and called it `regular expression` and thus, if you had to find any `expression` within a file, you would use the command
 
-`g/re/p` _ re for regular expression and thus, * grep *
+`g/re/p` \_ re for regular expression and thus,  _grep_ 
 
 So, what are regular expressions ?
 
-------
-
-# re
+## re
 
 [Ref Link](http://www.grymoire.com/Unix/Regular.html#uh-1)
 
@@ -255,5 +249,6 @@ A regular expression syntax consists of 3 main parts, namely
 For Example `^#*` is the simplist example show-casing all the 3 parts.
 
 1. `^` - indicates that the character set should `begin with`.
-2. `#` - the character '#' is the character that the line should start with.
+2. `#` - the character '\#' is the character that the line should start with.
 3. `*` - repeat that search for that character multiple times
+
