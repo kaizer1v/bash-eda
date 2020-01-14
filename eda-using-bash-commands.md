@@ -16,7 +16,7 @@ This notebook explores ways to do basic data analysis on files using shell comma
 
 This requires you to know some basics about the operating system and how to use the shell / command line and also regular expressions.
 
-For the purpose of this notebook, we are going to be using the `flags.csv` data [available in this repo](flags.csv).
+For the purpose of this notebook, we are going to be using the `flags.csv` data [available in this repo](https://github.com/kaizer1v/bash-eda/blob/master/flags.csv).
 
 _NOTE - before you begin with the commands, ensure your command line is in the directory that contains the flags.csv file_
 
