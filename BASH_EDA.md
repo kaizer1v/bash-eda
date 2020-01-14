@@ -1,24 +1,20 @@
----
-description: Basic data operations using command line
----
-
 # EDA using BASH commands
 
-This notebook explores ways to do basic data analysis on files using shell commands. These set of commands are really targeted towards linux or command line users - and who need to perform certain basic data related tasks, that you might be able to perform on excel or [pandas](https://github.com/kaizer1v/bash-eda/tree/5b36fbb394c8828ba1234a25d2aa3a61b1a1a793/pandas.pydata.org)
+This notebook explores ways to do basic data analysis on files using shell commands. These set of commands are really targeted towards linux or command line users - and who need to perform certain basic data related tasks, that you might be able to perform on excel or [pandas](pandas.pydata.org)
 
 **WHY use this?** - you may ask
 
 * You may not have access to Excel
-* You may not have a UI for the OS \(eg: working on a remote server\)
-* You may not have access to pandas \(the python library\)
+* You may not have a UI for the OS (eg: working on a remote server)
+* You may not have access to pandas (the python library)
 * The file is too large to load on any UI & takes a lot of time
 * You might quickly want to glance through what the data contains
 
 This requires you to know some basics about the operating system and how to use the shell / command line and also regular expressions.
 
-For the purpose of this notebook, we are going to be using the `flags.csv` data [available in this repo](https://github.com/kaizer1v/bash-eda/tree/5b36fbb394c8828ba1234a25d2aa3a61b1a1a793/flags.csv).
+For the purpose of this notebook, we are going to be using the `flags.csv` data [available in this repo](flags.csv).
 
-_NOTE - before you begin with the commands, ensure your command line is in the directory that contains the flags.csv file_
+*NOTE - before you begin with the commands, ensure your command line is in the directory that contains the flags.csv file*
 
 Also for every command that you see in this notebook, you can always check the `--help` or the `man` command to know more details about it. Eg: running the `head --help` will provide the necessary details for the `head` command.
 
@@ -30,7 +26,7 @@ Firstly, you want to open the file and see what's in it. Here's a way to view th
 head -1 flags.csv
 ```
 
-will display the first two lines from the file. The first line would be the column titles \(_if the data contains them_\), else it would be the first row of the data file.
+will display the first two lines from the file. The first line would be the column titles (_if the data contains them_), else it would be the first row of the data file.
 
 Each column would be separated by the delimiter that is contained in the file. This could be a `tab` or a `,` or anything else that is distinct enough and not contained in the data itself. Every row would be separated by the same delimiter.
 
@@ -66,7 +62,7 @@ As the name `head` and `tail` suggests, you can view the top and bottom rows.
 
 ## Overview
 
-Now that we have viewed the file the way we want, we would want to get some basic information about the file - like the total number of rows, the data types of each column etc.
+Now that we have viewed the file the way we want, we would want to get some basic information about the file - like the total number of rows, the data types of each column etc. 
 
 **Row Count**
 
@@ -76,7 +72,7 @@ If you want to know the total number of rows in the file. the `-l` parameter sta
 wc -l flags.csv
 ```
 
-_NOTE - `wc` stands for word count & you'll see this being used often_
+_NOTE - `wc` stands for word count & you'll see this being used often_ 
 
 **Word Count**
 
@@ -101,10 +97,10 @@ Let's say you want to know the index of the column `Continent`, you would do
 
 ```bash
 # assuming that your delimeter is the `:` char
-head -1 flags.csv | sed -e s/:/\\n/g | grep -n Continent | cut -c1-2
+head -1 flags.csv | sed -e s/:/\\n/g | grep -n Continent | cut -c1-2 
 ```
 
-If the column name does not exist, or there's a typo, then it will not return anything. Now, using the index, you can display only that particular column. You can print multiple columns separated by a tab, \(_denoted by `"\t"`_\)
+If the column name does not exist, or there's a typo, then it will not return anything. Now, using the index, you can display only that particular column. You can print multiple columns separated by a tab, (_denoted by `"\t"`_)
 
 ```bash
 awk -F: '{print $10 "\t" $11}' flags.csv | head -5
@@ -117,6 +113,7 @@ cut -d: -f1,10,11 flags.csv
 ```
 
 This will only show the 1st, 10th and 11th column.
+
 
 ## Sorting
 
@@ -144,6 +141,7 @@ cut -d: -f1,10,11 flags.csv | sort -k2 -r
 
 Note, once we apply the first `cut` command, we only have 3 columns to view i.e. the `ID`, the `Name` and the `Continent`. Here, the index also gets updated i.e. 1, 2, and 3 respectively. The part following the `|` in the above command, refers to `Name` as `-k2`.
 
+
 ## Filtering
 
 Let's filter by the Continent column and view only **Europe** continent
@@ -169,15 +167,15 @@ awk -F: '{sum += $2} END {print sum}' flags.csv
 
 **Step 2 - Filtering & summing**
 
-We already saw how to filter by a column. Let's combine that with the summing command using the `|` \(pipe\) operator
+We already saw how to filter by a column. Let's combine that with the summing command using the `|` (pipe) operator
 
 ```bash
 cut -d: -f1,2,10,11 flags.csv | grep Europe | awk -F: '{sum += $2} END {print sum}'
 ```
-
 _NOTE - we need to include the column to be summed i.e. 2_
 
-**NOT**
+
+**NOT** 
 
 Similarly, if you want to view all the Continent's other than Europe, then simply add the `-v` option in the grep
 
@@ -186,6 +184,7 @@ cut -d: -f1,10,11 flags.csv | grep -cv Europe
 ```
 
 the `-c` in the `grep` command will only return the `count` by defult instead of adding `wc -l` at the end of the line.
+
 
 ## Unique Values
 
@@ -203,7 +202,7 @@ But if you want to sort the column numerically, say column 2, then you also add 
 awk -F: '{print $2}' flags.csv | sort -un
 ```
 
-Appending the `wc -l` command to the previous one will give you the total number of unique values \(all together\)
+Appending the `wc -l` command to the previous one will give you the total number of unique values (all together)
 
 ```bash
 # counts the distinct count of `Name` column
@@ -227,13 +226,14 @@ cut -f11 -d: flags.csv | sort | uniq -c | sort -k1,1nr
 
 will sort the value counts in descending order for the `Continent` column i.e. column 11
 
+
 ## Merging
 
 For this purposes, consider two files containing the following texts
 
-_file1.txt_
+*file1.txt*
 
-```text
+```
 Nawazuddin grapes 27
 Sardar wasseypur 4
 Piyush dhanbad 8
@@ -244,9 +244,9 @@ Medson purple 30
 Flintstone dude 7
 ```
 
-and _file2.txt_ containing
+and *file2.txt* containing
 
-```text
+```
 Nawazuddin <pink>
 Sardar <blue>
 Piyush <orange>
@@ -257,16 +257,16 @@ Medson <blue>
 Flintstone <orange>
 ```
 
-You can merge two files like
+You can merge two files like 
 
 ```bash
 # delimeter as a space
 join file1.txt file2.txt
 ```
 
-will give you the output **merged** !!
+will give you the output **merged** !! 
 
-```text
+```
 Nawazuddin <pink> grapes 27
 Sardar <blue> wasseypur 4
 Piyush <orange> dhanbad 8
@@ -330,4 +330,3 @@ sort -nu demo1.csv | head -1
 # max
 sort -nu demo1.csv | tail -1
 ```
-
